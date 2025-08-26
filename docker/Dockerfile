@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements script into container
-COPY requirements.sh .
+COPY docker/requirements.sh .
 
 # Make script executable & run it
 RUN chmod +x requirements.sh && ./requirements.sh

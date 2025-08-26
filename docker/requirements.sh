@@ -5,10 +5,7 @@ set -e  # stop script if any command fails
 python3 -m ensurepip --upgrade
 python3 -m pip install --upgrade pip
 
-pip install pandas numpy requests
-pip install flask
-pip install apache-airflow
-pip install psycopg2-binary
-pip install python-dotenv
+pip install pandas numpy requests pyspark pytest
 
-echo "✅ All packages installed successfully!"
+
+echo "All packages installed successfully!"
