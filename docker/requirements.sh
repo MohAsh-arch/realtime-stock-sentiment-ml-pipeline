@@ -5,7 +5,8 @@ set -e  # stop script if any command fails
 python3 -m ensurepip --upgrade
 python3 -m pip install --upgrade pip
 
-pip install pandas numpy requests pyspark pytest
+pip install pandas numpy requests  pytest 
+pip install --no-cache-dir python-dotenv
 
 
 echo "All packages installed successfully!"
