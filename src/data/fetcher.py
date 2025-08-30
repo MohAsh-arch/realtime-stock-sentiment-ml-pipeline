@@ -1,4 +1,4 @@
-import fetch
+from src.data import fetch
 import os
 from dotenv import load_dotenv
 
@@ -14,5 +14,3 @@ client.save_to_csv(df_intraday,'appl_interaday')
 
 df_daily = client.fetch_daily("AAPL")
 client.save_to_csv(df_daily, "aapl_daily")
-
-print(df_intraday.head())
