@@ -16,3 +16,15 @@
 2025-08-30 14:48:43,109 [INFO] Fetching TIME_SERIES_DAILY for AAPL with params={}
 2025-08-30 14:48:43,702 [INFO] Received 100 rows for AAPL
 2025-08-30 14:48:43,711 [INFO] Saved data to aapl_daily.csv
+2025-08-30 15:25:04,246 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-30 15:25:05,229 [INFO] Received 100 rows for AAPL
+2025-08-30 15:25:05,237 [INFO] Saved data to appl_interaday.csv
+2025-08-30 15:25:05,237 [INFO] Fetching TIME_SERIES_DAILY for AAPL with params={}
+2025-08-30 15:25:05,973 [INFO] Received 100 rows for AAPL
+2025-08-30 15:25:05,978 [INFO] Saved data to aapl_daily.csv
+2025-08-30 15:25:11,262 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-30 15:25:12,071 [INFO] Received 100 rows for AAPL
+2025-08-30 15:25:12,078 [INFO] Saved data to appl_interaday.csv
+2025-08-30 15:25:12,078 [INFO] Fetching TIME_SERIES_DAILY for AAPL with params={}
+2025-08-30 15:25:12,697 [INFO] Received 100 rows for AAPL
+2025-08-30 15:25:12,702 [INFO] Saved data to aapl_daily.csv

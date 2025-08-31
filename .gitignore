@@ -7,3 +7,5 @@ __pycache__/
 # pytest cache
 .pytest_cache/
 
+docker/postgres_data/
+

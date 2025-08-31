@@ -1,0 +1,17 @@
+2025-08-31 18:53:31,744 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 18:53:32,694 [INFO] Received 100 rows for AAPL
+2025-08-31 23:04:43,696 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 23:04:44,413 [INFO] Received 100 rows for AAPL
+2025-08-31 23:07:00,446 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 23:07:01,422 [INFO] Received 100 rows for AAPL
+2025-08-31 23:12:57,890 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 23:12:58,863 [INFO] Received 100 rows for AAPL
+2025-08-31 23:14:47,697 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 23:14:48,948 [INFO] Received 100 rows for AAPL
+2025-08-31 23:18:36,272 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 23:18:38,221 [INFO] Received 100 rows for AAPL
+2025-08-31 23:20:57,158 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 23:22:58,122 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 23:23:02,689 [INFO] Received 100 rows for AAPL
+2025-08-31 23:23:18,068 [INFO] Fetching TIME_SERIES_INTRADAY for AAPL with params={'interval': '5min'}
+2025-08-31 23:23:18,880 [INFO] Received 100 rows for AAPL

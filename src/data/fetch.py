@@ -48,7 +48,8 @@ class AlphaVantageClient:
             "5. volume": "volume"
         })
         df = df.astype(float)  
-        df = df.sort_index()   
+        df = df.sort_index()
+        df["symbol"] = "AAPL"
 
         logger.info(f"Received {len(ts_data)} rows for {symbol}")
         logger.debug(f"Data sample:\n{df.head()}")
@@ -68,3 +69,5 @@ class AlphaVantageClient:
         path = f"{file_name}.csv"
         df.to_csv(path, index=True)
         logger.info(f"Saved data to {path}")
+    
+    
