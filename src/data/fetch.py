@@ -20,7 +20,7 @@ class AlphaVantageClient:
         r = requests.get(self.base_url, params=params, timeout=10)
         data = r.json()
 
-        # --- Error handling ---
+        
         if "Error Message" in data:
             logger.error(f"Invalid request for {symbol}: {data['Error Message']}")
             raise ValueError(f"Invalid request: {data['Error Message']}")
@@ -29,7 +29,7 @@ class AlphaVantageClient:
             logger.warning(f"API limit reached while fetching {symbol}")
             raise RuntimeError("API limit reached. Try again later.")
 
-        # --- Extract time series dynamically ---
+       
         ts_key = next((k for k in data.keys() if "Time Series" in k), None)
         if not ts_key:
             logger.error(f"Unexpected API response for {symbol}, no time series found.")
@@ -37,7 +37,7 @@ class AlphaVantageClient:
 
         ts_data = data[ts_key]
 
-        # --- Convert to DataFrame ---
+        
         df = pd.DataFrame.from_dict(ts_data, orient="index")
         df.index = pd.to_datetime(df.index)  
         df = df.rename(columns={
@@ -49,7 +49,7 @@ class AlphaVantageClient:
         })
         df = df.astype(float)  
         df = df.sort_index()
-        df["symbol"] = "AAPL"
+        df["symbol"] = symbol
 
         logger.info(f"Received {len(ts_data)} rows for {symbol}")
         logger.debug(f"Data sample:\n{df.head()}")

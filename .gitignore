@@ -8,4 +8,4 @@ __pycache__/
 .pytest_cache/
 
 docker/postgres_data/
-
+docker/airflow_postgres/
