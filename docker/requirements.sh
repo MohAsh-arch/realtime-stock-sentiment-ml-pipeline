@@ -10,4 +10,5 @@ pip install --no-cache-dir python-dotenv
 
 pip install psycopg2-binary sqlalchemy
 
+
 echo "All packages installed successfully!"

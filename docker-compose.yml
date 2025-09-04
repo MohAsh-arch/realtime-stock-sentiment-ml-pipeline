@@ -2,21 +2,26 @@ version: '3.9'
 
 x-airflow-common:
   &airflow-common
-  image: apache/airflow:2.9.0
+  build:
+    context: .
+    dockerfile: docker/airflow.Dockerfile
+  image: local/airflow-with-app:2.9.0
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
-    AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow_db/airflow
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow_db/airflow
     AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@airflow_db/airflow
     AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
-    AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
+    AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
+    - ./src:/opt/airflow/app/src   # live code for your app
+    - ./.env:/opt/airflow/.env:ro  # optional: share env vars with DAGs
   user: "50000:0"
   depends_on:
     redis:
@@ -26,8 +31,9 @@ x-airflow-common:
 
 services:
 
+  # -----------------
   # Pipeline container
- 
+  # -----------------
   pipeline:
     build:
       context: .
@@ -44,9 +50,9 @@ services:
       POSTGRES_HOST: db
     command: bash
 
-  
+  # -----------------
   # Stock DB
-  
+  # -----------------
   db:
     image: postgres:15
     container_name: stock_db
@@ -59,9 +65,9 @@ services:
     volumes:
       - ./docker/postgres_data:/var/lib/postgresql/data
 
-
+  # -----------------
   # PgAdmin for stock_DB
-
+  # -----------------
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: stock_pgadmin
@@ -73,9 +79,9 @@ services:
     depends_on:
       - db
 
-
+  # -----------------
   # Redis broker
-
+  # -----------------
   redis:
     image: redis:latest
     ports:
@@ -87,9 +93,9 @@ services:
       retries: 50
     restart: always
 
-
+  # -----------------
   # Airflow metadata DB
-
+  # -----------------
   airflow_db:
     image: postgres:15
     container_name: airflow_db
@@ -108,9 +114,9 @@ services:
       retries: 10
     restart: always
 
-
+  # -----------------
   # Airflow services
-  
+  # -----------------
   airflow-init:
     <<: *airflow-common
     command: bash -c "airflow db upgrade && \

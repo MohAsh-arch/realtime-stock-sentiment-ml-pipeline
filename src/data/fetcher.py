@@ -7,13 +7,12 @@ from src.db.connection import engine
 load_dotenv()
 
 
+def fetch_stock_data():
+    api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
+    url = 'https://www.alphavantage.co/query?'
 
-api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
-url = 'https://www.alphavantage.co/query?'
+    client = fetch.AlphaVantageClient(api_key,url)
 
-client = fetch.AlphaVantageClient(api_key,url)
-
-df_intraday = client.fetch_intraday('AAPL')
-#
-ingest_dataframe(df_intraday, "stock_intraday" , engine)
+    df_intraday = client.fetch_intraday('AAPL')
+    ingest_dataframe(df_intraday, "stock_intraday" , engine)
 
