@@ -3,7 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def data_cleaner(raw_data: dict, symbol: str) -> pd.DataFrame:
+def clean_stock_data(raw_data: dict, symbol: str) -> pd.DataFrame:
     """
     Convert raw AlphaVantage JSON response into a clean DataFrame.
     """
