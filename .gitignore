@@ -9,3 +9,4 @@ __pycache__/
 
 docker/postgres_data/
 docker/airflow_postgres/
+logs/
