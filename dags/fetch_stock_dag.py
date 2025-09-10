@@ -24,7 +24,15 @@ url = "https://www.alphavantage.co/query?"
 client = fetch.AlphaVantageClient(api_key, url)
 
 # Companies to track
-symbols = ["AAPL", "MSFT", "GOOGL"]
+symbols = ["AAPL", "MSFT", "GOOGL", "AMZN", "META",
+    
+    # Finance
+    "JPM", "BAC", "GS",
+    
+    # Emerging / High Volatility
+    "TSLA", "NVDA",
+    
+]
 
 # ------------------- PIPELINE FUNCTIONS -------------------
 
@@ -35,8 +43,14 @@ def fetch_to_db(symbol):
 
 def clean_to_db(symbol):
     raw = pd.read_sql(f"SELECT * FROM raw_stock_data WHERE symbol='{symbol}'", engine)
+
+    # Ensure proper timestamp column
+    if "index" in raw.columns and "timestamp" not in raw.columns:
+        raw = raw.rename(columns={"index": "timestamp"})
+
     cleaned = clean_stock_data(raw, symbol)   # clean raw data
     ingest_dataframe(cleaned, "cleaned_stock_data", engine)
+
 
 def final_ingest(symbol):
     cleaned = pd.read_sql(f"SELECT * FROM cleaned_stock_data WHERE symbol='{symbol}'", engine)

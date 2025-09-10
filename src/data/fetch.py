@@ -9,7 +9,6 @@ class AlphaVantageClient:
         self.base_url = base_url
 
     def _fetch(self, function, symbol, **kwargs):
-
         params = {
             "function": function,
             "symbol": symbol,
@@ -23,11 +22,10 @@ class AlphaVantageClient:
 
         if "Error Message" in data:
             logger.error(f"Invalid request for {symbol}: {data['Error Message']}")
-            return pd.DataFrame()  # safer than raising in DAGs
+            return pd.DataFrame()
 
-        if "Note" in data:  
+        if "Note" in data:
             logger.warning(f"API limit reached while fetching {symbol}")
-            # optionally add sleep here
             raise RuntimeError("API limit reached. Try again later.")
 
         ts_key = next((k for k in data.keys() if "Time Series" in k), None)
@@ -35,8 +33,15 @@ class AlphaVantageClient:
             logger.error(f"Unexpected API response for {symbol}, no time series found.")
             return pd.DataFrame()
 
+        # Convert dict → DataFrame
+        df = pd.DataFrame.from_dict(data[ts_key], orient="index")
+        df.index = pd.to_datetime(df.index)  # ensure proper datetime index
+        df = df.reset_index().rename(columns={"index": "timestamp"})
+        df["symbol"] = symbol
 
-        return data
+        return df
+
+
 
 
     def fetch_intraday(self, symbol, interval="5min"):
